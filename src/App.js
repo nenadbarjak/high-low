@@ -1,7 +1,12 @@
 import React from 'react';
+import Cardboard from './components/Cardboard';
+import Interface from './components/Interface';
 
 const App = () => (
-	<h1>HIGH - LOW</h1>
+	<div>
+		<Cardboard />
+		<Interface />
+	</div>
 );
 
 export default App;

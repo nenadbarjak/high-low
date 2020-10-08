@@ -4,6 +4,7 @@ const TerserPlugin = require('terser-webpack-plugin')
 const OptimizeCssAssetPlugin = require('optimize-css-assets-webpack-plugin')
 
 module.exports = {
+    mode: 'production',
     optimization: {
         minimize: true,
         minimizer: [ new TerserPlugin({}), new OptimizeCssAssetPlugin({}) ]
@@ -30,12 +31,21 @@ module.exports = {
                     'css-loader',
                     'sass-loader'
                 ]
+            },
+            {
+                test: /\.(png|jpe?g|gif)$/i,
+                use: [
+                    {
+                        loader: 'file-loader'
+                    }
+                ]
             }
         ]
     },
     plugins: [
         new MiniCssExtractPlugin({ filename: 'styles.css' })
     ],
+    devtool: 'inline-source-map',
     devServer: {
         contentBase: path.join(__dirname, 'public'),
         historyApiFallback: true,
