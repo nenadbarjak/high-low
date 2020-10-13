@@ -1,4 +1,4 @@
 import { createStore } from 'redux';
-import deck from './reducers/deck';
+import rootReducer from './reducers';
 
-export default createStore(deck);
+export default createStore(rootReducer);
