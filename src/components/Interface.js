@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { openNextCard } from '../redux/actions';
 
 const Interface = ({
-	nextCardOpen, openNextCard,
+	deck, openCards, nextCardOpen, openNextCard,
 }) => {
 	const [bet, setBet] = useState(10);
 	const [coins, setCoins] = useState(100);
@@ -45,10 +45,41 @@ const Interface = ({
 		setBet(10);
 	};
 
-	const handleClick = () => {
+	const betHigher = () => {
+		const openCard = openCards[openCards.length - 1];
+		const nextCard = deck[0];
+		
+		if (openCard.value > nextCard.value) {
+			console.log('YOU WIN!!!')
+			localStorage.setItem('coins', JSON.stringify(coins + bet))
+			setCoins(coins + bet)
+		} else {
+			console.log('YOU LOSE!!!')
+			localStorage.setItem('coins', JSON.stringify(coins - bet))
+			setCoins(coins - bet)
+		}
+
 		localStorage.setItem('nextCardOpen', JSON.stringify(true))
 		openNextCard();
-	};
+	}
+
+	const betLower = () => {
+		const openCard = openCards[openCards.length - 1];
+		const nextCard = deck[0];
+		
+		if (openCard.value < nextCard.value) {
+			console.log('YOU WIN!!!')
+			localStorage.setItem('coins', JSON.stringify(coins + bet))
+			setCoins(coins + bet)
+		} else {
+			console.log('YOU LOSE!!!')
+			localStorage.setItem('coins', JSON.stringify(coins - bet))
+			setCoins(coins - bet)
+		}
+
+		localStorage.setItem('nextCardOpen', JSON.stringify(true))
+		openNextCard();
+	}
 
 	return	(
 		<div className="wrap">
@@ -80,14 +111,14 @@ const Interface = ({
 				<button
 					type="button"
 					disabled={!coins || nextCardOpen}
-					onClick={handleClick}
+					onClick={betHigher}
 				>
 					HIGHER
 				</button>
 				<button
 					type="button"
 					disabled={!coins || nextCardOpen}
-					onClick={handleClick}
+					onClick={betLower}
 				>
 					LOWER
 				</button>
@@ -108,6 +139,8 @@ const Interface = ({
 };
 
 const mapStateToProps = state => ({
+	deck: state.deck,
+	openCards: state.openCards,
 	nextCardOpen: state.nextCardOpen,
 });
 
