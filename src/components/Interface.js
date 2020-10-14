@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
-import { openNextCard } from '../redux/actions';
+import { openNextCard, setStatusMsg } from '../redux/actions';
 
 const Interface = ({
-	deck, openCards, nextCardOpen, openNextCard,
+	deck, openCards, nextCardOpen, openNextCard, setStatusMsg
 }) => {
 	const [bet, setBet] = useState(10);
 	const [coins, setCoins] = useState(100);
@@ -48,37 +48,45 @@ const Interface = ({
 	const betHigher = () => {
 		const openCard = openCards[openCards.length - 1];
 		const nextCard = deck[0];
+		let msg;
 		
 		if (openCard.value > nextCard.value) {
-			console.log('YOU WIN!!!')
+			msg = 'WIN';
+			//setStatusMsg('WIN');
 			localStorage.setItem('coins', JSON.stringify(coins + bet))
 			setCoins(coins + bet)
 		} else {
-			console.log('YOU LOSE!!!')
+			msg = 'LOSE';
+			//setStatusMsg('LOSE');
 			localStorage.setItem('coins', JSON.stringify(coins - bet))
 			setCoins(coins - bet)
 		}
 
 		localStorage.setItem('nextCardOpen', JSON.stringify(true))
 		openNextCard();
+		setStatusMsg(msg);
 	}
 
 	const betLower = () => {
 		const openCard = openCards[openCards.length - 1];
 		const nextCard = deck[0];
+		let msg;
 		
 		if (openCard.value < nextCard.value) {
-			console.log('YOU WIN!!!')
+			msg = 'WIN';
+			//setStatusMsg('WIN');
 			localStorage.setItem('coins', JSON.stringify(coins + bet))
 			setCoins(coins + bet)
 		} else {
-			console.log('YOU LOSE!!!')
+			msg = 'LOSE';
+			//setStatusMsg('LOSE');
 			localStorage.setItem('coins', JSON.stringify(coins - bet))
 			setCoins(coins - bet)
 		}
 
 		localStorage.setItem('nextCardOpen', JSON.stringify(true))
 		openNextCard();
+		setStatusMsg(msg);
 	}
 
 	return	(
@@ -146,7 +154,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
 	openNextCard: () => dispatch(openNextCard()),
-
+	setStatusMsg: msg => dispatch(setStatusMsg(msg))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Interface);

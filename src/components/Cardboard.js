@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { addCard, turnCard } from '../redux/actions';
 
 const Cardboard = ({
-	deck, openCards, nextCardOpen, addCard, turnCard,
+	deck, openCards, nextCardOpen, addCard, turnCard, statusMsg
 }) => {
 	const canvasRef = useRef(null);
 
@@ -30,6 +30,12 @@ const Cardboard = ({
 
 		context.drawImage(image, card.srcX, card.srcY, 61.54, 81, wCoord, y, 180, 236.92);
 	};
+
+	const winLoseText = (context) => {
+		context.font = "80px Roboto";
+		context.fillStyle = "#ff0";
+		context.fillText(`You ${statusMsg}!`, 400, 550);
+	}
 
 	useEffect(() => {
 		const img = document.getElementById('cards');
@@ -63,6 +69,7 @@ const Cardboard = ({
 			const nextCard = deck[0];
 
 			nextCardOpen && drawNextCard(ctx, frameCount, img, nextCard);
+			statusMsg && winLoseText(ctx);
 
 			animate = window.requestAnimationFrame(render);
 		};
@@ -72,7 +79,7 @@ const Cardboard = ({
 		return () => {
 			window.cancelAnimationFrame(animate);
 		};
-	}, [openCards, deck, nextCardOpen]);
+	}, [openCards, deck, nextCardOpen, statusMsg]);
 
 	return (
 		<div className="wrap">
@@ -89,6 +96,7 @@ const mapStateToProps = state => ({
 	deck: state.deck,
 	openCards: state.openCards,
 	nextCardOpen: state.nextCardOpen,
+	statusMsg: state.statusMsg
 });
 
 const mapDispatchToProps = dispatch => ({

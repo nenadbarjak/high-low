@@ -26,3 +26,10 @@ export const addCard = card => ({
 export const openNextCard = () => ({
 	type: 'OPEN_NEXT_CARD',
 });
+
+export const setStatusMsg = msg => ({
+	type: 'SET_MSG',
+	payload: {
+		msg
+	}
+});
