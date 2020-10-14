@@ -18,6 +18,12 @@ const Cardboard = ({
 		}
 
 		if (frameCount === 180) {
+			localStorage.setItem('nextCardOpen', JSON.stringify(false));
+			localStorage.setItem('openCards', JSON.stringify([...openCards, deck[0]]));
+			let tempArr = [...deck];
+			tempArr.shift()
+			localStorage.setItem('deck', JSON.stringify(tempArr));
+
 			turnCard();
 			addCard(deck[0]);
 		}
@@ -26,6 +32,7 @@ const Cardboard = ({
 	};
 
 	const handleClick = () => {
+		localStorage.setItem('nextCardOpen', JSON.stringify(true))
 		openNextCard();
 	};
 
