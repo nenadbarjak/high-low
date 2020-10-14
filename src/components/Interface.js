@@ -10,14 +10,28 @@ const Interface = () => {
 		}
 	}, [coins, bet]);
 
+	useEffect(() => {
+		let coins = JSON.parse(localStorage.getItem('coins'));
+		if (coins) {
+			setCoins(coins)
+		}
+
+		let bet = JSON.parse(localStorage.getItem('bet'));
+		if (bet) {
+			setBet(bet)
+		}
+	}, [])
+
 	const increaseBet = () => {
 		if (bet <= coins - 10) {
+			localStorage.setItem('bet', JSON.stringify(bet + 10))
 			setBet(prevBet => prevBet + 10);
 		}
 	};
 
 	const decreaseBet = () => {
 		if (coins >= 10 && bet >= 20) {
+			localStorage.setItem('bet', JSON.stringify(bet - 10))
 			setBet(prevBet => prevBet - 10);
 		}
 	};
