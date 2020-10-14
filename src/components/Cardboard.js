@@ -1,9 +1,9 @@
 import React, { useEffect, useRef } from 'react';
 import { connect } from 'react-redux';
-import { addCard, turnCard, openNextCard } from '../redux/actions';
+import { addCard, turnCard } from '../redux/actions';
 
 const Cardboard = ({
-	deck, openCards, nextCardOpen, addCard, turnCard, openNextCard,
+	deck, openCards, nextCardOpen, addCard, turnCard,
 }) => {
 	const canvasRef = useRef(null);
 
@@ -29,11 +29,6 @@ const Cardboard = ({
 		}
 
 		context.drawImage(image, card.srcX, card.srcY, 61.54, 81, wCoord, y, 180, 236.92);
-	};
-
-	const handleClick = () => {
-		localStorage.setItem('nextCardOpen', JSON.stringify(true))
-		openNextCard();
 	};
 
 	useEffect(() => {
@@ -86,7 +81,6 @@ const Cardboard = ({
 				width="1125"
 				height="560	"
 			/>
-			<button onClick={handleClick}>TURN CARD</button>
 		</div>
 	);
 };
@@ -100,8 +94,6 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
 	turnCard: () => dispatch(turnCard()),
 	addCard: card => dispatch(addCard(card)),
-	openNextCard: () => dispatch(openNextCard()),
-
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Cardboard);

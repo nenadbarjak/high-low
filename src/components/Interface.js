@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from 'react';
+import { connect } from 'react-redux';
+import { openNextCard } from '../redux/actions';
 
-const Interface = () => {
+const Interface = ({
+	nextCardOpen, openNextCard,
+}) => {
 	const [bet, setBet] = useState(10);
 	const [coins, setCoins] = useState(100);
 
@@ -41,6 +45,11 @@ const Interface = () => {
 		setBet(10);
 	};
 
+	const handleClick = () => {
+		localStorage.setItem('nextCardOpen', JSON.stringify(true))
+		openNextCard();
+	};
+
 	return	(
 		<div className="wrap">
 			<div>
@@ -70,13 +79,15 @@ const Interface = () => {
 			<div>
 				<button
 					type="button"
-					disabled={!coins}
+					disabled={!coins || nextCardOpen}
+					onClick={handleClick}
 				>
 					HIGHER
 				</button>
 				<button
 					type="button"
-					disabled={!coins}
+					disabled={!coins || nextCardOpen}
+					onClick={handleClick}
 				>
 					LOWER
 				</button>
@@ -96,4 +107,13 @@ const Interface = () => {
 	);
 };
 
-export default Interface;
+const mapStateToProps = state => ({
+	nextCardOpen: state.nextCardOpen,
+});
+
+const mapDispatchToProps = dispatch => ({
+	openNextCard: () => dispatch(openNextCard()),
+
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Interface);
