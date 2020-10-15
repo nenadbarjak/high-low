@@ -52,12 +52,10 @@ const Interface = ({
 
 		if (openCard.value > nextCard.value) {
 			msg = 'WIN';
-			// setStatusMsg('WIN');
 			localStorage.setItem('coins', JSON.stringify(coins + bet));
 			setCoins(coins + bet);
 		} else {
 			msg = 'LOSE';
-			// setStatusMsg('LOSE');
 			localStorage.setItem('coins', JSON.stringify(coins - bet));
 			setCoins(coins - bet);
 		}
@@ -74,12 +72,10 @@ const Interface = ({
 
 		if (openCard.value < nextCard.value) {
 			msg = 'WIN';
-			// setStatusMsg('WIN');
 			localStorage.setItem('coins', JSON.stringify(coins + bet));
 			setCoins(coins + bet);
 		} else {
 			msg = 'LOSE';
-			// setStatusMsg('LOSE');
 			localStorage.setItem('coins', JSON.stringify(coins - bet));
 			setCoins(coins - bet);
 		}
@@ -98,7 +94,7 @@ const Interface = ({
 					onClick={increaseBet}
 					disabled={!coins}
 				>
-					&uarr;
+					+ 10 coins
 				</button>
 				{bet}
 				<button
@@ -106,7 +102,7 @@ const Interface = ({
 					onClick={decreaseBet}
 					disabled={!coins}
 				>
-					&darr;
+					- 10 coins
 				</button>
 			</div>
 			<div>
@@ -121,14 +117,14 @@ const Interface = ({
 					disabled={!coins || nextCardOpen || !deck.length}
 					onClick={betHigher}
 				>
-					HIGHER
+					&uarr; HIGHER
 				</button>
 				<button
 					type="button"
 					disabled={!coins || nextCardOpen || !deck.length}
 					onClick={betLower}
 				>
-					LOWER
+					&darr; LOWER
 				</button>
 			</div>
 			<div>
