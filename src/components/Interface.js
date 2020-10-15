@@ -148,7 +148,7 @@ const Interface = ({
 					</button>
 				</div>
 
-				<div className="bet">					
+				<div className="bet">
 					<button
 						type="button"
 						onClick={increaseBet}
@@ -159,7 +159,7 @@ const Interface = ({
 					<div className="bet__middle">
 						<h1>Bet</h1>
 						<h1>{bet}</h1>
-					</div>					
+					</div>
 					<button
 						type="button"
 						onClick={decreaseBet}
@@ -168,7 +168,7 @@ const Interface = ({
 						- 10 coins
 					</button>
 				</div>
-				
+
 				<div className="reset">
 					<button
 						type="button"
@@ -184,7 +184,7 @@ const Interface = ({
 						RESET
 					</button>
 				</div>
-			</div>			
+			</div>
 		</div>
 	);
 };
