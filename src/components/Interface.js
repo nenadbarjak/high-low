@@ -122,62 +122,69 @@ const Interface = ({
 
 	return	(
 		<div className="wrap">
-			<div>
-				<h1>Bet</h1>
-				<button
-					type="button"
-					onClick={increaseBet}
-					disabled={!coins}
-				>
-					+ 10 coins
-				</button>
-				{bet}
-				<button
-					type="button"
-					onClick={decreaseBet}
-					disabled={!coins}
-				>
-					- 10 coins
-				</button>
-			</div>
-			<div>
-				<h1>
-					Coins:
-					{coins}
-				</h1>
-			</div>
-			<div>
-				<button
-					type="button"
-					disabled={!coins || nextCardOpen || !deck.length}
-					onClick={betHigher}
-				>
-					&uarr; HIGHER
-				</button>
-				<button
-					type="button"
-					disabled={!coins || nextCardOpen || !deck.length}
-					onClick={betLower}
-				>
-					&darr; LOWER
-				</button>
-			</div>
-			<div>
-				<button
-					type="button"
-					onClick={newGame}
-				>
-					NEW GAME
-				</button>
-			</div>
-			<div>
-				<button
-					onClick={reset}
-					type="button"
-				>
-					RESET
-				</button>
-			</div>
+			<div className="interface">
+				<div className="controls">
+					<button
+						type="button"
+						disabled={!coins || nextCardOpen || !deck.length}
+						onClick={betHigher}
+					>
+						&uarr; HIGHER
+					</button>
+
+					<div className="controls__middle">
+						<h1>
+							Coins:
+							{coins}
+						</h1>
+					</div>
+
+					<button
+						type="button"
+						disabled={!coins || nextCardOpen || !deck.length}
+						onClick={betLower}
+					>
+						&darr; LOWER
+					</button>
+				</div>
+
+				<div className="bet">					
+					<button
+						type="button"
+						onClick={increaseBet}
+						disabled={!coins}
+					>
+						+ 10 coins
+					</button>
+					<div className="bet__middle">
+						<h1>Bet</h1>
+						<h1>{bet}</h1>
+					</div>					
+					<button
+						type="button"
+						onClick={decreaseBet}
+						disabled={!coins}
+					>
+						- 10 coins
+					</button>
+				</div>
+				
+				<div className="reset">
+					<button
+						type="button"
+						onClick={newGame}
+					>
+						NEW GAME
+					</button>
+
+					<button
+						onClick={reset}
+						type="button"
+					>
+						RESET
+					</button>
+				</div>
+			</div>			
 		</div>
 	);
 };

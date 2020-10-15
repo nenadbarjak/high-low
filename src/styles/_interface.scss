@@ -1,0 +1,52 @@
+.interface {
+    padding: 2rem 0;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1rem;
+
+    & button {
+        padding: 1rem 0;
+    }
+
+    &__middle {
+        font-size: 2.4rem;
+        width: 15rem;
+        display: flex;
+        justify-content: center;
+    }
+}
+
+.bet {
+    display: flex;
+    margin-bottom: 1rem;
+
+    &__middle {
+        font-size: 2.4rem;
+        width: 15rem;
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+.reset {
+    display: flex;
+    justify-content: space-between;
+
+    & button:first-child {
+        margin-right: 7.5rem;
+    }
+
+    & button:last-child {
+        margin-left: 7.5rem;
+    }
+}
