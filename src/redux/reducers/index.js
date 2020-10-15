@@ -8,5 +8,5 @@ export default combineReducers({
 	deck,
 	openCards,
 	nextCardOpen,
-	statusMsg
+	statusMsg,
 });

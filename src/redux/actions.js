@@ -30,6 +30,6 @@ export const openNextCard = () => ({
 export const setStatusMsg = msg => ({
 	type: 'SET_MSG',
 	payload: {
-		msg
-	}
+		msg,
+	},
 });

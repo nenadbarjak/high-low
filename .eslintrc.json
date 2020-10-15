@@ -77,7 +77,9 @@
     "arrow-parens": ["error", "as-needed", {
       "requireForBlockBody": true
     }],
-    "no-plusplus": [2, { "allowForLoopAfterthoughts": true }],
-    "no-nested-ternary": "off"
+    "no-plusplus": "off",
+    "no-shadow": "off",
+    "no-nested-ternary": "off",
+    "react/prop-types": 0
   }
 }

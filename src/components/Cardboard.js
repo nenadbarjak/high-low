@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { addCard, turnCard } from '../redux/actions';
 
 const Cardboard = ({
-	deck, openCards, nextCardOpen, addCard, turnCard, statusMsg
+	deck, openCards, nextCardOpen, addCard, turnCard, statusMsg,
 }) => {
 	const canvasRef = useRef(null);
 
@@ -20,8 +20,8 @@ const Cardboard = ({
 		if (frameCount === 180) {
 			localStorage.setItem('nextCardOpen', JSON.stringify(false));
 			localStorage.setItem('openCards', JSON.stringify([...openCards, deck[0]]));
-			let tempArr = [...deck];
-			tempArr.shift()
+			const tempArr = [...deck];
+			tempArr.shift();
 			localStorage.setItem('deck', JSON.stringify(tempArr));
 
 			turnCard();
@@ -32,10 +32,10 @@ const Cardboard = ({
 	};
 
 	const winLoseText = (context) => {
-		context.font = "80px Roboto";
-		context.fillStyle = "#ff0";
+		context.font = '80px Roboto';
+		context.fillStyle = '#ff0';
 		context.fillText(`You ${statusMsg}!`, 400, 550);
-	}
+	};
 
 	useEffect(() => {
 		const img = document.getElementById('cards');
@@ -96,7 +96,7 @@ const mapStateToProps = state => ({
 	deck: state.deck,
 	openCards: state.openCards,
 	nextCardOpen: state.nextCardOpen,
-	statusMsg: state.statusMsg
+	statusMsg: state.statusMsg,
 });
 
 const mapDispatchToProps = dispatch => ({

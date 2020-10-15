@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { openNextCard, setStatusMsg } from '../redux/actions';
 
 const Interface = ({
-	deck, openCards, nextCardOpen, openNextCard, setStatusMsg
+	deck, openCards, nextCardOpen, openNextCard, setStatusMsg,
 }) => {
 	const [bet, setBet] = useState(10);
 	const [coins, setCoins] = useState(100);
@@ -15,27 +15,27 @@ const Interface = ({
 	}, [coins, bet]);
 
 	useEffect(() => {
-		let coins = JSON.parse(localStorage.getItem('coins'));
+		const coins = JSON.parse(localStorage.getItem('coins'));
 		if (coins) {
-			setCoins(coins)
+			setCoins(coins);
 		}
 
-		let bet = JSON.parse(localStorage.getItem('bet'));
+		const bet = JSON.parse(localStorage.getItem('bet'));
 		if (bet) {
-			setBet(bet)
+			setBet(bet);
 		}
-	}, [])
+	}, []);
 
 	const increaseBet = () => {
 		if (bet <= coins - 10) {
-			localStorage.setItem('bet', JSON.stringify(bet + 10))
+			localStorage.setItem('bet', JSON.stringify(bet + 10));
 			setBet(prevBet => prevBet + 10);
 		}
 	};
 
 	const decreaseBet = () => {
 		if (coins >= 10 && bet >= 20) {
-			localStorage.setItem('bet', JSON.stringify(bet - 10))
+			localStorage.setItem('bet', JSON.stringify(bet - 10));
 			setBet(prevBet => prevBet - 10);
 		}
 	};
@@ -49,45 +49,45 @@ const Interface = ({
 		const openCard = openCards[openCards.length - 1];
 		const nextCard = deck[0];
 		let msg;
-		
+
 		if (openCard.value > nextCard.value) {
 			msg = 'WIN';
-			//setStatusMsg('WIN');
-			localStorage.setItem('coins', JSON.stringify(coins + bet))
-			setCoins(coins + bet)
+			// setStatusMsg('WIN');
+			localStorage.setItem('coins', JSON.stringify(coins + bet));
+			setCoins(coins + bet);
 		} else {
 			msg = 'LOSE';
-			//setStatusMsg('LOSE');
-			localStorage.setItem('coins', JSON.stringify(coins - bet))
-			setCoins(coins - bet)
+			// setStatusMsg('LOSE');
+			localStorage.setItem('coins', JSON.stringify(coins - bet));
+			setCoins(coins - bet);
 		}
 
-		localStorage.setItem('nextCardOpen', JSON.stringify(true))
+		localStorage.setItem('nextCardOpen', JSON.stringify(true));
 		openNextCard();
 		setStatusMsg(msg);
-	}
+	};
 
 	const betLower = () => {
 		const openCard = openCards[openCards.length - 1];
 		const nextCard = deck[0];
 		let msg;
-		
+
 		if (openCard.value < nextCard.value) {
 			msg = 'WIN';
-			//setStatusMsg('WIN');
-			localStorage.setItem('coins', JSON.stringify(coins + bet))
-			setCoins(coins + bet)
+			// setStatusMsg('WIN');
+			localStorage.setItem('coins', JSON.stringify(coins + bet));
+			setCoins(coins + bet);
 		} else {
 			msg = 'LOSE';
-			//setStatusMsg('LOSE');
-			localStorage.setItem('coins', JSON.stringify(coins - bet))
-			setCoins(coins - bet)
+			// setStatusMsg('LOSE');
+			localStorage.setItem('coins', JSON.stringify(coins - bet));
+			setCoins(coins - bet);
 		}
 
-		localStorage.setItem('nextCardOpen', JSON.stringify(true))
+		localStorage.setItem('nextCardOpen', JSON.stringify(true));
 		openNextCard();
 		setStatusMsg(msg);
-	}
+	};
 
 	return	(
 		<div className="wrap">
@@ -154,7 +154,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
 	openNextCard: () => dispatch(openNextCard()),
-	setStatusMsg: msg => dispatch(setStatusMsg(msg))
+	setStatusMsg: msg => dispatch(setStatusMsg(msg)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Interface);

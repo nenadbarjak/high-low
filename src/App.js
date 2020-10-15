@@ -3,20 +3,20 @@ import { connect } from 'react-redux';
 import Cardboard from './components/Cardboard';
 import Interface from './components/Interface';
 import {
-	setDeck, addCard, turnCard, setOpenCards, openNextCard
+	setDeck, addCard, turnCard, setOpenCards, openNextCard,
 } from './redux/actions';
 import { getDeck, shuffle } from './utils/deck';
 
 const App = ({
-	setDeck, setOpenCards, addCard, turnCard, openNextCard
+	setDeck, setOpenCards, addCard, turnCard, openNextCard,
 }) => {
 	useEffect(() => {
 		let deck = JSON.parse(localStorage.getItem('deck'));
-		let openCards = JSON.parse(localStorage.getItem('openCards'));
-		let nextCardOpen = JSON.parse(localStorage.getItem('nextCardOpen'))
+		const openCards = JSON.parse(localStorage.getItem('openCards'));
+		const nextCardOpen = JSON.parse(localStorage.getItem('nextCardOpen'));
 
 		if (nextCardOpen) {
-			openNextCard()
+			openNextCard();
 		}
 
 		if (deck && openCards) {
@@ -49,7 +49,7 @@ const mapDispatchToProps = dispatch => ({
 	setOpenCards: openCards => dispatch(setOpenCards(openCards)),
 	addCard: card => dispatch(addCard(card)),
 	turnCard: () => dispatch(turnCard()),
-	openNextCard: () => dispatch(openNextCard())
+	openNextCard: () => dispatch(openNextCard()),
 });
 
 export default connect(null, mapDispatchToProps)(App);
