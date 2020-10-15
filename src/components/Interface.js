@@ -52,7 +52,7 @@ const Interface = ({
 		const nextCard = deck[0];
 		let msg;
 
-		if (openCard.value > nextCard.value) {
+		if (nextCard.value > openCard.value) {
 			msg = 'WIN';
 			localStorage.setItem('coins', JSON.stringify(coins + bet));
 			setCoins(coins + bet);
@@ -72,7 +72,7 @@ const Interface = ({
 		const nextCard = deck[0];
 		let msg;
 
-		if (openCard.value < nextCard.value) {
+		if (nextCard.value < openCard.value) {
 			msg = 'WIN';
 			localStorage.setItem('coins', JSON.stringify(coins + bet));
 			setCoins(coins + bet);
