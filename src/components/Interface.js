@@ -118,14 +118,14 @@ const Interface = ({
 			<div>
 				<button
 					type="button"
-					disabled={!coins || nextCardOpen}
+					disabled={!coins || nextCardOpen || !deck.length}
 					onClick={betHigher}
 				>
 					HIGHER
 				</button>
 				<button
 					type="button"
-					disabled={!coins || nextCardOpen}
+					disabled={!coins || nextCardOpen || !deck.length}
 					onClick={betLower}
 				>
 					LOWER

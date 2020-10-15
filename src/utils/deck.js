@@ -1,5 +1,5 @@
 export const getDeck = () => {
-	const suits = ['spades', 'clubs', 'diamonds', 'hearts'];
+	const suits = ['clubs', 'diamonds', 'hearts', 'spades'];
 	const numbers = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K'];
 	const deck = [];
 
@@ -9,8 +9,8 @@ export const getDeck = () => {
 				suit,
 				number,
 				value: j === 0 ? 13 : j,
-				srcX: j * 61.54,
-				srcY: i * 81,
+				srcX: j * 167.62,
+				srcY: i * 243.2,
 			};
 
 			deck.push(card);

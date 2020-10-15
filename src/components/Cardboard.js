@@ -28,7 +28,7 @@ const Cardboard = ({
 			addCard(deck[0]);
 		}
 
-		context.drawImage(image, card.srcX, card.srcY, 61.54, 81, wCoord, y, 180, 236.92);
+		context.drawImage(image, card.srcX, card.srcY, 167.62, 243.2, wCoord, y, 180, 236.92);
 	};
 
 	const winLoseText = (context) => {
@@ -37,9 +37,15 @@ const Cardboard = ({
 		context.fillText(`You ${statusMsg}!`, 400, 550);
 	};
 
+	const newGameText = (context) => {
+		context.font = '40px Roboto';
+		context.fillStyle = '#ff0';
+		context.fillText('Click NEW GAME button', 485, 330);
+		context.fillText('if you want to play again', 485, 380);
+	};
+
 	useEffect(() => {
 		const img = document.getElementById('cards');
-		const back = document.getElementById('back');
 
 		const canvas = canvasRef.current;
 		const ctx = canvas.getContext('2d');
@@ -59,12 +65,13 @@ const Cardboard = ({
 				const row = i < 25 ? 0 : (i < 50 ? 1 : 2);
 				const column = i < 25 ? i : (i < 50 ? i - 25 : i - 50);
 
-				ctx.drawImage(img, openCards[i].srcX, openCards[i].srcY, 61.54, 81, column * 45, row * 65, 45, 59.23);
+				ctx.drawImage(img, openCards[i].srcX, openCards[i].srcY, 167.62, 243.2, column * 45, row * 65, 45, 59.23);
 			}
 			const openCard = openCards[openCards.length - 1];
-			openCard && ctx.drawImage(img, openCard.srcX, openCard.srcY, 61.54, 81, 280, 210, 180, 236.92);
+			openCard && ctx.drawImage(img, openCard.srcX, openCard.srcY, 167.62, 243.2, 280, 210, 180, 236.92);
 
-			ctx.drawImage(back, 660, 210, 180, 236.92);
+			deck.length > 1 && ctx.drawImage(img, 335.24, 972.80, 167.62, 243.2, 660, 210, 180, 236.92);
+			!deck.length && newGameText(ctx);
 
 			const nextCard = deck[0];
 
