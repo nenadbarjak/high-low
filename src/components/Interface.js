@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
-import { openNextCard, setStatusMsg } from '../redux/actions';
+import {
+	openNextCard, setStatusMsg, setDeck, addCard, turnCard, setOpenCards,
+} from '../redux/actions';
+import { getDeck, shuffle } from '../utils/deck';
 
 const Interface = ({
-	deck, openCards, nextCardOpen, openNextCard, setStatusMsg,
+	deck, openCards, nextCardOpen, openNextCard, setStatusMsg, setDeck, turnCard, setOpenCards,
 }) => {
 	const [bet, setBet] = useState(10);
 	const [coins, setCoins] = useState(100);
@@ -11,6 +14,10 @@ const Interface = ({
 	useEffect(() => {
 		if (coins < bet) {
 			setBet(coins);
+		}
+
+		if (!coins) {
+			alert('You have no coins. Click RESET button to get 100 coins and play again.');
 		}
 	}, [coins, bet]);
 
@@ -38,11 +45,6 @@ const Interface = ({
 			localStorage.setItem('bet', JSON.stringify(bet - 10));
 			setBet(prevBet => prevBet - 10);
 		}
-	};
-
-	const reset = () => {
-		setCoins(100);
-		setBet(10);
 	};
 
 	const betHigher = () => {
@@ -83,6 +85,39 @@ const Interface = ({
 		localStorage.setItem('nextCardOpen', JSON.stringify(true));
 		openNextCard();
 		setStatusMsg(msg);
+	};
+
+	const newGame = () => {
+		localStorage.clear();
+		localStorage.setItem('coins', JSON.stringify(coins));
+
+		const newDeck = shuffle(getDeck());
+		localStorage.setItem('openCards', JSON.stringify([newDeck[0]]));
+
+		setDeck(newDeck);
+		setOpenCards([newDeck[0]]);
+		turnCard();
+
+		newDeck.shift();
+		localStorage.setItem('deck', JSON.stringify(newDeck));
+		setBet(10);
+	};
+
+	const reset = () => {
+		localStorage.clear();
+
+		const newDeck = shuffle(getDeck());
+		localStorage.setItem('openCards', JSON.stringify([newDeck[0]]));
+
+		setDeck(newDeck);
+		setOpenCards([newDeck[0]]);
+		turnCard();
+
+		newDeck.shift();
+		localStorage.setItem('deck', JSON.stringify(newDeck));
+
+		setCoins(100);
+		setBet(10);
 	};
 
 	return	(
@@ -128,7 +163,12 @@ const Interface = ({
 				</button>
 			</div>
 			<div>
-				<button type="button">NEW GAME</button>
+				<button
+					type="button"
+					onClick={newGame}
+				>
+					NEW GAME
+				</button>
 			</div>
 			<div>
 				<button
@@ -149,6 +189,10 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
+	setDeck: deck => dispatch(setDeck(deck)),
+	setOpenCards: openCards => dispatch(setOpenCards(openCards)),
+	addCard: card => dispatch(addCard(card)),
+	turnCard: () => dispatch(turnCard()),
 	openNextCard: () => dispatch(openNextCard()),
 	setStatusMsg: msg => dispatch(setStatusMsg(msg)),
 });

@@ -4,10 +4,11 @@ export default (state = [], action) => {
 		return [
 			...action.payload.deck,
 		];
-	case 'TURN_CARD':
+	case 'TURN_CARD': {
 		const temp = [...state];
 		temp.shift();
 		return temp;
+	}
 	default:
 		return state;
 	}

@@ -80,6 +80,7 @@
     "no-plusplus": "off",
     "no-shadow": "off",
     "no-nested-ternary": "off",
-    "react/prop-types": 0
+    "react/prop-types": 0,
+    "no-unused-expressions": "off"
   }
 }
